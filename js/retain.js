@@ -13,6 +13,17 @@ $(function(){
         },
         getAllNotes: function() {
             return JSON.parse(localStorage.notes);
+        },
+        del: function(obj) {
+          var notes = model.getAllNotes();
+          var noteToDel = notes.find(function(elem, idx, arr) {
+            return elem.content === obj.content;
+          });
+          if (noteToDel !== undefined) {
+            var idxToDel = notes.indexOf(noteToDel);
+            notes.splice(idxToDel, 1);
+            localStorage.notes = JSON.stringify(notes);
+          }
         }
     };
 
@@ -23,6 +34,13 @@ $(function(){
                 content: noteStr
             });
             view.render();
+        },
+
+        delNote: function(noteStr) {
+          model.del({
+            content: noteStr
+          });
+          view.render();
         },
 
         getNotes: function() {
