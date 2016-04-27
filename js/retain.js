@@ -27,19 +27,26 @@ $(function(){
         }
     };
 
+    var modelUtil = {
+      createNote: function(noteStr) {
+        var note = {
+          content: noteStr
+        };
+        return note;
+      }
+    };
+
 
     var octopus = {
         addNewNote: function(noteStr) {
-            model.add({
-                content: noteStr
-            });
+            var note = modelUtil.createNote(noteStr);
+            model.add(note);
             view.render();
         },
 
         delNote: function(noteStr) {
-          model.del({
-            content: noteStr
-          });
+          var note = modelUtil.createNote(noteStr);
+          model.del(note);
           view.render();
         },
 
