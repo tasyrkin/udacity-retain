@@ -15,7 +15,7 @@ $(function(){
             return JSON.parse(localStorage.notes);
         },
         del: function(obj) {
-          var notes = model.getAllNotes();
+          var notes = this.getAllNotes();
           var noteToDel = notes.find(function(elem, idx, arr) {
             return elem.content === obj.content;
           });
@@ -81,6 +81,10 @@ $(function(){
                     '</li>';
             });
             this.noteList.html( htmlStr );
+            var htmlNotes = $( ".note" ).click(function(){
+              var noteStr = $(this).text();
+              octopus.delNote(noteStr);
+            });
         }
     };
 
