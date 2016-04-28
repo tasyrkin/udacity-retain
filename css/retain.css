@@ -26,6 +26,10 @@
     background-color: #cde;
 }
 
+.note-elem {
+    display: inline-block;
+}
+
 .note-date {
     font-size:0.7em;
     margin-bottom: 10px;

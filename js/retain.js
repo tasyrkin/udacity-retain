@@ -67,22 +67,26 @@ $(function(){
             var newNoteForm = $('#new-note-form');
             var newNoteContent = $('#new-note-content');
             newNoteForm.submit(function(e){
-                octopus.addNewNote(newNoteContent.val());
-                newNoteContent.val('');
-                e.preventDefault();
+                var noteStr = newNoteContent.val();
+                if(noteStr !== '') {
+                  octopus.addNewNote(newNoteContent.val());
+                  newNoteContent.val('');
+                  e.preventDefault();
+                }
             });
             view.render();
         },
         render: function(){
             var htmlStr = '';
             octopus.getNotes().forEach(function(note){
-                htmlStr += '<li class="note">'+
-                        note.content +
-                    '</li>';
+                htmlStr += '<div class="note">'
+                htmlStr +=    '<button type="button" class="deleteBtn note-elem" name="' + note.content + '">X</button>';
+                htmlStr +=    '<li class="note-elem">' + note.content + '</li>';
+                htmlStr += '</div>'
             });
             this.noteList.html( htmlStr );
-            var htmlNotes = $( ".note" ).click(function(){
-              var noteStr = $(this).text();
+            var htmlNotes = $( ".deleteBtn" ).click(function(){
+              var noteStr = $(this).attr("name");
               octopus.delNote(noteStr);
             });
         }
