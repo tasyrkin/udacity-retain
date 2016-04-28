@@ -80,7 +80,7 @@ $(function(){
             var htmlStr = '';
             octopus.getNotes().forEach(function(note){
                 htmlStr += '<div class="note">'
-                htmlStr +=    '<button type="button" class="deleteBtn note-elem" name="' + note.content + '">X</button>';
+                htmlStr +=    '<button type="button" class="deleteBtn note-elem" style="visibility:hidden" name="' + note.content + '">X</button>';
                 htmlStr +=    '<li class="note-elem">' + note.content + '</li>';
                 htmlStr += '</div>'
             });
@@ -88,6 +88,14 @@ $(function(){
             var htmlNotes = $( ".deleteBtn" ).click(function(){
               var noteStr = $(this).attr("name");
               octopus.delNote(noteStr);
+            });
+
+            $( ".note" ).mouseover(function(){
+              $(this).find(".deleteBtn").css("visibility", "visible");
+            });
+
+            $( ".note" ).mouseout(function(){
+              $(this).find(".deleteBtn").css("visibility", "hidden");
             });
         }
     };
